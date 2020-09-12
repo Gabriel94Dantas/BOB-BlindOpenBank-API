@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  bob:
+    build: .
+    ports:
+      - "5001:5000"
+    environment:
+      - MONGO_HOST=mongo
+    networks:
+      - mongo-compose-network
+
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    restart: always
+    networks:
+      - mongo-compose-network
+networks:
+  mongo-compose-network:
