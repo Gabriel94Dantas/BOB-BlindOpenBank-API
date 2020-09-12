@@ -19,6 +19,7 @@ class Client:
     token_date = None
     panic_password = None
     account_id = None
+    password = None
     mongo_connection_factory = MongoConnectionFactory()
 
     def insert_client(self, client):
@@ -73,7 +74,8 @@ class Client:
             db_client = self.mongo_connection_factory.get_connection()
             query = {
                 'user_id': client.user_id,
-                'device_id': client.device_id
+                'device_id': client.device_id,
+                'password': client.password
             }
             result = db_client['bob']['clients'].find(query)
             if result:
@@ -124,7 +126,8 @@ class Client:
             'token': client.token,
             'token_date': client.token_date,
             'panic_password': client.panic_password,
-            'account_id': client.account_id
+            'account_id': client.account_id,
+            'password': client.password
         }
 
         return client_json
@@ -149,4 +152,6 @@ class Client:
             client.panic_password = client_json['panic_password']
         if 'account_id' in client_json:
             client.account_id = client_json['account_id']
+        if 'password' in client_json:
+            client.password = client_json['password']
         return client
