@@ -39,3 +39,39 @@ def account_information(account_id):
     }
     response = requests.get(url=url, headers=header)
     return json.loads(response.content.decode('ascii'))
+
+
+def balance_safra(account_id):
+    """
+        This method returns Safra's client balance
+    :param account_id
+    :return: Safra's client balance information
+    """
+    url = constants.API_SF_URL + constants.OPEN_BANK_ACCOUNT + \
+        str(account_id) + constants.BALANCE_LINK
+    token = 'Bearer ' + token_generator()
+    header = {
+        'Authorization': token
+    }
+    response = requests.get(url=url, headers=header)
+    return json.loads(response.content.decode('ascii'))
+
+
+def transactions_safra(account_id):
+    """
+            This method returns Safra's client transactions
+        :param account_id
+        :return: Safra's client transactions information
+        """
+    url = constants.API_SF_URL + constants.OPEN_BANK_ACCOUNT + \
+        str(account_id) + constants.TRANSACTIONS_LINK
+    token = 'Bearer ' + token_generator()
+    header = {
+        'Authorization': token
+    }
+    response = requests.get(url=url, headers=header)
+    return json.loads(response.content.decode('ascii'))
+
+
+def transactions_days_before_safra(client_json, days_before):
+    return client_json

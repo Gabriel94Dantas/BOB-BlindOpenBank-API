@@ -5,7 +5,8 @@
 from app.model.client import Client
 from app.util.date import current_time, add_minutes
 from app.constants import constants
-from app.view.safra import account_information
+from app.view.safra import account_information, balance_safra, \
+    transactions_safra
 
 
 """
@@ -52,3 +53,15 @@ class ClientController:
             }]
             return result
         return constants.NOT_FOUND
+
+    def client_balance(self, client_json):
+        client_returned = self.find_client_by_user_device_id(client_json)
+        if client_returned == constants.UNAUTHORIZED:
+            return client_returned
+        return balance_safra(client_returned['account_id'])
+
+    def client_transactions(self, client_json):
+        client_returned = self.find_client_by_user_device_id(client_json)
+        if client_returned == constants.UNAUTHORIZED:
+            return client_returned
+        return transactions_safra(client_returned['account_id'])
