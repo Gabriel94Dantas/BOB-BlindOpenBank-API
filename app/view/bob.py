@@ -69,15 +69,18 @@ def morning_call_safra(client_json):
     return jsonify(response)
 
 
-def bob_logs():
+def bob_logs(adm_token):
     """
     This method is the endpoint to return the logs
     :return: JSON with all logs
     """
     bob_controller = BobLogController()
-    bob_logs_json_array = bob_controller.find_all_bob_log()
+    bob_logs_json_array = bob_controller.find_all_bob_log(adm_token)
     if bob_logs_json_array == constants.NOT_FOUND:
         response = {'status': constants.NOT_FOUND, 'response': 'Not Found'}
+        return jsonify(response)
+    if bob_logs_json_array == constants.UNAUTHORIZED:
+        response = {'status': constants.UNAUTHORIZED, 'response': 'Unauthorized'}
         return jsonify(response)
     response = {'status': constants.OK, 'response': bob_logs_json_array}
     return jsonify(response)

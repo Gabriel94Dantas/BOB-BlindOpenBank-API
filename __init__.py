@@ -52,7 +52,8 @@ def bob_logs():
     """
         The method is responsible to be the route to logs
     """
-    return bob.bob_logs()
+    adm_token = request.headers['Authorization']
+    return bob.bob_logs(adm_token)
 
 
 if __name__ == '__main__':
