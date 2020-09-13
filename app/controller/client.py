@@ -6,7 +6,7 @@ from app.model.client import Client
 from app.util.date import current_time, add_minutes
 from app.constants import constants
 from app.view.safra import account_information, balance_safra, \
-    transactions_safra
+    transactions_safra, morning_calls_safra
 
 
 """
@@ -55,13 +55,34 @@ class ClientController:
         return constants.NOT_FOUND
 
     def client_balance(self, client_json):
+        """
+        This method returns the balance of a client if its token be valid
+        :param client_json: user_id, device_id, token must be inside this JSON
+        :return: balance or unauthorized HTTP code
+        """
         client_returned = self.find_client_by_user_device_id(client_json)
         if client_returned == constants.UNAUTHORIZED:
             return client_returned
         return balance_safra(client_returned['account_id'])
 
     def client_transactions(self, client_json):
+        """
+        This method returns the transactions of a client if its token be valid
+        :param client_json: user_id, device_id, token must be inside this JSON
+        :return: transactions or unauthorized HTTP code
+        """
         client_returned = self.find_client_by_user_device_id(client_json)
         if client_returned == constants.UNAUTHORIZED:
             return client_returned
         return transactions_safra(client_returned['account_id'])
+
+    def client_morning_call(self, client_json):
+        """
+        This method returns the morning call of a client if its token be valid
+        :param client_json: user_id, device_id, token must be inside this JSON
+        :return: morning call or unauthorized HTTP code
+        """
+        client_returned = self.find_client_by_user_device_id(client_json)
+        if client_returned == constants.UNAUTHORIZED:
+            return client_returned
+        return morning_calls_safra()

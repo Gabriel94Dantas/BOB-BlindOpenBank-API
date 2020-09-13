@@ -6,6 +6,7 @@ import requests
 import json
 from app.constants import constants
 from app.util.base64 import encode
+from app.util import date
 
 
 def token_generator():
@@ -73,5 +74,18 @@ def transactions_safra(account_id):
     return json.loads(response.content.decode('ascii'))
 
 
-def transactions_days_before_safra(client_json, days_before):
-    return client_json
+def morning_calls_safra():
+    """
+        This method returns mornings call
+    """
+    url = constants.API_SF_URL + constants.MORNING_CALLS_LINK
+    parameters_url = '?fromData=' + '2020-07-09' + \
+        '&toData=' + '2020-07-14' + \
+        '&playlist=morningCalls&channel=safra'
+    url = url + parameters_url
+    token = 'Bearer ' + token_generator()
+    header = {
+        'Authorization': token
+    }
+    response = requests.get(url=url, headers=header)
+    return json.loads(response.content.decode('utf8'))

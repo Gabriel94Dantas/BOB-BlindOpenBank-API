@@ -22,3 +22,15 @@ def add_minutes(date_parameter, minutes):
     """
     new_date = date_parameter + datetime.timedelta(minutes=minutes)
     return new_date
+
+
+def last_week_day():
+    """
+    This method will return the last week day
+    :return: The last week day
+    """
+    today = current_time()
+    offset = max(1, (today.weekday() + 6) % 7 - 3)
+    timedelta = datetime.timedelta(offset)
+    most_recent = today - timedelta
+    return most_recent

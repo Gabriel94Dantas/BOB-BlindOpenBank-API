@@ -35,7 +35,16 @@ def transactions_safra():
         The method is responsible to be the route to transactions
     """
     client_json = header_to_client_json.header_to_client_json(request.headers)
-    return bob.transactions_safra(client_json=client_json, day_before=None)
+    return bob.transactions_safra(client_json=client_json)
+
+
+@app.route('/morning-calls', methods=['GET'])
+def morning_calls_safra():
+    """
+        The method is responsible to be the route to morning-calls
+    """
+    client_json = header_to_client_json.header_to_client_json(request.headers)
+    return bob.morning_call_safra(client_json)
 
 
 if __name__ == '__main__':
