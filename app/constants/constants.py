@@ -11,3 +11,4 @@ API_SF_URL = "https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.cu
 OPEN_BANK_ACCOUNT = "/open-banking/v1/accounts/"
 BALANCE_LINK = "/balances"
 TRANSACTIONS_LINK = "/transactions"
+MORNING_CALLS_LINK = "/media/v1/youtube"

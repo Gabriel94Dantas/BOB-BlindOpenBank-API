@@ -38,13 +38,31 @@ def balance_safra(client_json):
     return jsonify(response)
 
 
-def transactions_safra(client_json, day_before):
+def transactions_safra(client_json):
+    """
+    This method is the endpoint to return the transactions of a client
+    :param client_json: user_id, device_id, token
+    :return: transactions response
+    """
     client_controller = ClientController()
-    if day_before:
-        return
     transactions = client_controller.client_transactions(client_json)
     if transactions == constants.UNAUTHORIZED:
         response = {'status': constants.UNAUTHORIZED, 'response': 'Expired session'}
         return jsonify(response)
     response = {'status': constants.OK, 'response': transactions}
+    return jsonify(response)
+
+
+def morning_call_safra(client_json):
+    """
+    This method is the endpoint to return the morning call of a client
+    :param client_json: user_id, device_id, token
+    :return: morning call response
+    """
+    client_controller = ClientController()
+    morning_calls = client_controller.client_morning_call(client_json)
+    if morning_calls == constants.UNAUTHORIZED:
+        response = {'status': constants.UNAUTHORIZED, 'response': 'Expired session'}
+        return jsonify(response)
+    response = {'status': constants.OK, 'audioURL': morning_calls['data'][1]['links'][1]['href']}
     return jsonify(response)
