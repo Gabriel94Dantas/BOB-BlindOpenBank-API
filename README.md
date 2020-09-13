@@ -1,3 +1,4 @@
+![enter image description here](https://github.com/Gabriel94Dantas/BOBAPI/blob/master/imgs/logo-bob-api.jpg)
 #  BOB-OpenBlindBank-API
 
 ## Papel da BOB-API
