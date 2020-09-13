@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "2129df1b-c6d3-4264-ab7d-6d4ec2290e91",
+		"name": "API-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ec2-18-218-87-145.us-east-2.compute.amazonaws.com:5001/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "UserId",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "DeviceId",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "SessionId",
+						"value": "12345678biscoito",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"password\": \"8888\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "ec2-18-218-87-145.us-east-2.compute.amazonaws.com:5001/login",
+					"host": [
+						"ec2-18-218-87-145",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "5001",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ec2-18-218-87-145.us-east-2.compute.amazonaws.com:5001/balance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "UserId",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "DeviceId",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "SessionId",
+						"value": "12345678biscoito",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "ec2-18-218-87-145.us-east-2.compute.amazonaws.com:5001/balance",
+					"host": [
+						"ec2-18-218-87-145",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "5001",
+					"path": [
+						"balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ec2-18-218-87-145.us-east-2.compute.amazonaws.com:5001/transactions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "UserId",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "DeviceId",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "SessionId",
+						"value": "12345678biscoito",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "ec2-18-218-87-145.us-east-2.compute.amazonaws.com:5001/transactions",
+					"host": [
+						"ec2-18-218-87-145",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "5001",
+					"path": [
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ec2-18-218-87-145.us-east-2.compute.amazonaws.com:5001/morning-calls",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "UserId",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "DeviceId",
+						"value": "123",
+						"type": "text"
+					},
+					{
+						"key": "SessionId",
+						"value": "12345678biscoito",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "ec2-18-218-87-145.us-east-2.compute.amazonaws.com:5001/morning-calls",
+					"host": [
+						"ec2-18-218-87-145",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "5001",
+					"path": [
+						"morning-calls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ec2-18-218-87-145.us-east-2.compute.amazonaws.com:5001/logs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "ec2-18-218-87-145.us-east-2.compute.amazonaws.com:5001/logs",
+					"host": [
+						"ec2-18-218-87-145",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "5001",
+					"path": [
+						"logs"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
