@@ -14,7 +14,7 @@ from app.util import date
 class BobLogController:
     bob_log_class = BobLog()
 
-    def find_all_bob_log(self):
+    def find_all_bob_log(self, adm_token):
         """
         This method is responsible to control find_all bob_log
         endpoint
@@ -22,6 +22,8 @@ class BobLogController:
         :return: bob_log_array_json if exists logs. If log doesn't
         exists to return not found
         """
+        if adm_token != constants.ADM_TOKEN:
+            return constants.UNAUTHORIZED
         bob_logs = self.bob_log_class.find_all()
         bob_log_array_json = []
         if bob_logs:
