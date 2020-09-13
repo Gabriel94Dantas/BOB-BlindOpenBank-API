@@ -4,6 +4,7 @@
 
 from flask import jsonify
 from app.controller.client import ClientController
+from app.controller.bob_log import BobLogController
 from app.constants import constants
 
 
@@ -65,4 +66,18 @@ def morning_call_safra(client_json):
         response = {'status': constants.UNAUTHORIZED, 'response': 'Expired session'}
         return jsonify(response)
     response = {'status': constants.OK, 'audioURL': morning_calls['data'][1]['links'][1]['href']}
+    return jsonify(response)
+
+
+def bob_logs():
+    """
+    This method is the endpoint to return the logs
+    :return: JSON with all logs
+    """
+    bob_controller = BobLogController()
+    bob_logs_json_array = bob_controller.find_all_bob_log()
+    if bob_logs_json_array == constants.NOT_FOUND:
+        response = {'status': constants.NOT_FOUND, 'response': 'Not Found'}
+        return jsonify(response)
+    response = {'status': constants.OK, 'response': bob_logs_json_array}
     return jsonify(response)

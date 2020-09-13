@@ -47,6 +47,14 @@ def morning_calls_safra():
     return bob.morning_call_safra(client_json)
 
 
+@app.route('/logs', methods=['GET'])
+def bob_logs():
+    """
+        The method is responsible to be the route to logs
+    """
+    return bob.bob_logs()
+
+
 if __name__ == '__main__':
     """
         The main method of application

@@ -3,6 +3,7 @@
 """
 
 from app.model.client import Client
+from app.controller.bob_log import BobLogController
 from app.util.date import current_time, add_minutes
 from app.constants import constants
 from app.view.safra import account_information, balance_safra, \
@@ -17,6 +18,7 @@ from app.view.safra import account_information, balance_safra, \
 
 class ClientController:
     client_class = Client()
+    bob_controller = BobLogController()
 
     def find_client_by_user_device_id(self, client_json):
         """
@@ -26,8 +28,12 @@ class ClientController:
         """
         client = self.client_class.json_to_client(client_json)
         client_returned = self.client_class.find_client_by_user_device_id(client)
-        if client_returned.token_date < current_time():
-            return constants.UNAUTHORIZED
+        if client_returned:
+            if client_returned.token_date < current_time():
+                return constants.UNAUTHORIZED
+        else:
+            if not client_returned:
+                return constants.UNAUTHORIZED
         return self.client_class.client_to_json(client_returned)
 
     def login_client(self, client_json):
@@ -51,6 +57,12 @@ class ClientController:
                 'client_bob': self.client_class.client_to_json(client_returned),
                 'account_info': account_information(client_returned.account_id)
             }]
+            self.bob_controller.insert_bob_log(
+                self.bob_controller.set_bob_log(
+                    client_json, constants.LOGIN_OP, constants.LOGIN_DES))
+            self.bob_controller.insert_bob_log(
+                self.bob_controller.set_bob_log(
+                    client_json, constants.ACCOUNT_OP, constants.ACCOUNT_DES))
             return result
         return constants.NOT_FOUND
 
@@ -63,6 +75,9 @@ class ClientController:
         client_returned = self.find_client_by_user_device_id(client_json)
         if client_returned == constants.UNAUTHORIZED:
             return client_returned
+        self.bob_controller.insert_bob_log(
+            self.bob_controller.set_bob_log(
+                client_json, constants.BALANCE_OP, constants.BALANCE_DES))
         return balance_safra(client_returned['account_id'])
 
     def client_transactions(self, client_json):
@@ -74,6 +89,9 @@ class ClientController:
         client_returned = self.find_client_by_user_device_id(client_json)
         if client_returned == constants.UNAUTHORIZED:
             return client_returned
+        self.bob_controller.insert_bob_log(
+            self.bob_controller.set_bob_log(
+                client_json, constants.TRANSACTIONS_OP, constants.TRANSACTIONS_DES))
         return transactions_safra(client_returned['account_id'])
 
     def client_morning_call(self, client_json):
@@ -85,4 +103,7 @@ class ClientController:
         client_returned = self.find_client_by_user_device_id(client_json)
         if client_returned == constants.UNAUTHORIZED:
             return client_returned
+        self.bob_controller.insert_bob_log(
+            self.bob_controller.set_bob_log(
+                client_json, constants.MORNING_OP, constants.MORNING_DES))
         return morning_calls_safra()

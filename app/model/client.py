@@ -120,15 +120,23 @@ class Client:
         :param client: client object
         :return: client_json
         """
-        client_json = {
-            'device_id': client.device_id,
-            'user_id': client.user_id,
-            'token': client.token,
-            'token_date': client.token_date,
-            'panic_password': client.panic_password,
-            'account_id': client.account_id,
-            'password': client.password
-        }
+
+        client_json = {}
+        if client:
+            if client.device_id:
+                client_json['device_id'] = client.device_id
+            if client.user_id:
+                client_json['user_id'] = client.user_id
+            if client.token:
+                client_json['token'] = client.token
+            if client.token_date:
+                client_json['token_date'] = client.token_date
+            if client.panic_password:
+                client_json['panic_password'] = client.panic_password
+            if client.account_id:
+                client_json['account_id'] = client.account_id
+            if client.password:
+                client_json['password'] = client.password
 
         return client_json
 
